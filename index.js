@@ -22,11 +22,17 @@ connectDB();
 app.use(express.urlencoded({ extended: true })); // For form-data (application/x-www-form-urlencoded)
 app.use(express.json()); // Middleware to parse JSON data
 app.use(cookieParser());
+
+
+// ✅ Allowed frontend origins
 const allowedOrigins = ['https://nayasathi.vercel.app'];
 
+// ✅ CORS middleware
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin) return callback(null, allowedOrigins[0]); // Allow undefined (e.g., mobile apps or Postman)
+
+    if (allowedOrigins.includes(origin)) {
       callback(null, origin);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -35,6 +41,8 @@ app.use(cors({
   credentials: true
 }));
 
+// ✅ Handle preflight (OPTIONS) requests
+app.options('*', cors());
 
 app.get('/', (req, res) => {
   res.send('🚀 WhatsApp Messaging API is running');
