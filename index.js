@@ -16,12 +16,6 @@ import whatsappRoutes from './routes/whatsapp.js'; // Import the WhatsApp routes
 const app = express();
 const PORT = 3000;
 
-// Connect to MongoDB
-connectDB();
-
-app.use(express.urlencoded({ extended: true })); // For form-data (application/x-www-form-urlencoded)
-app.use(express.json()); // Middleware to parse JSON data
-app.use(cookieParser());
 
 
 // ✅ Allowed frontend origins
@@ -43,6 +37,16 @@ app.use(cors({
 
 // ✅ Handle preflight (OPTIONS) requests
 app.options('*', cors());
+
+
+// Connect to MongoDB
+connectDB();
+
+app.use(express.urlencoded({ extended: true })); // For form-data (application/x-www-form-urlencoded)
+app.use(express.json()); // Middleware to parse JSON data
+app.use(cookieParser());
+
+
 
 app.get('/', (req, res) => {
   res.send('🚀 WhatsApp Messaging API is running');
