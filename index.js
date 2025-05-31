@@ -22,8 +22,16 @@ connectDB();
 app.use(express.urlencoded({ extended: true })); // For form-data (application/x-www-form-urlencoded)
 app.use(express.json()); // Middleware to parse JSON data
 app.use(cookieParser());
+const allowedOrigins = ['https://nayasathi.vercel.app'];
+
 app.use(cors({
-  origin: 'https://nayasathi.vercel.app/',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
