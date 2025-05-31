@@ -22,14 +22,11 @@ connectDB();
 app.use(express.urlencoded({ extended: true })); // For form-data (application/x-www-form-urlencoded)
 app.use(express.json()); // Middleware to parse JSON data
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      callback(null, origin || "*"); // Allow all origins dynamically
-    },
-    credentials: true, // Allow credentials (cookies, auth headers, etc.)
-  })
-);
+app.use(cors({
+  origin: 'https://nayasathi.vercel.app/',
+  credentials: true
+}));
+
 
 app.get('/', (req, res) => {
   res.send('🚀 WhatsApp Messaging API is running');
