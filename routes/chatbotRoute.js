@@ -1,4 +1,4 @@
-import { chatbot } from './chatbot.js';
+import { chatbot } from '../controllers/chatbot.js';
 import express from 'express';
 import Router from 'express';
 
