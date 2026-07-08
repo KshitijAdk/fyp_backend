@@ -12,6 +12,8 @@ import adoptionRoutes from './routes/adoptionRoutes.js'
 import adminStats from './routes/adminStats.js'
 import blogRoutes from './routes/blogsRoutes.js'; // Import the blog routes
 import whatsappRoutes from './routes/whatsapp.js'; // Import the WhatsApp routes
+import chatbotRoutes from './routes/chatbotRoute.js'; // Import the chatbot routes
+
 
 const app = express();
 const PORT = 3000;
@@ -19,7 +21,7 @@ const PORT = 3000;
 
 
 // ✅ Allowed frontend origins
-const allowedOrigins = ['https://nayasathi.vercel.app'];
+const allowedOrigins = ['https://nayasathi.vercel.app, http://localhost:5173'];
 
 // ✅ CORS middleware
 app.use(cors({
@@ -61,6 +63,8 @@ app.use("/api/adoption", adoptionRoutes); // Mount pet routes
 app.use("/api/admin", adminStats); // Mount pet routes
 app.use('/api/whatsapp', whatsappRoutes);
 app.use('/api/blogs', blogRoutes); // Mount blog routes
+app.use('/api/chatbot', chatbotRoutes); // Mount chatbot routes
+
 
 
 // Start the server
