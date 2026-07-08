@@ -21,21 +21,25 @@ const PORT = 3000;
 
 
 // ✅ Allowed frontend origins
-const allowedOrigins = ['https://nayasathi.vercel.app, http://localhost:5173'];
-
+const allowedOrigins = [
+  "https://nayasathi.vercel.app",
+  "http://localhost:5173"
+];
 // ✅ CORS middleware
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, allowedOrigins[0]); // Allow undefined (e.g., mobile apps or Postman)
+    if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
-      callback(null, origin);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+      return callback(null, true);
     }
+
+    return callback(new Error("Not allowed by CORS"));
   },
   credentials: true
 }));
+
+
 
 // ✅ Handle preflight (OPTIONS) requests
 app.options('*', cors());
